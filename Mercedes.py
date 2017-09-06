@@ -23,7 +23,7 @@ from sklearn import svm
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import VarianceThreshold
-from sklearn.preprocessing import StandardScaler
+from sklearn import preprocessing
 from sklearn.pipeline import Pipeline
 
 
@@ -46,6 +46,7 @@ def convert_data(data):
 
 
 nmerc = convert_data(merc)    
+
 
 #%%
 plt.rcParams['figure.figsize']=(10,9)
@@ -101,7 +102,14 @@ importances = forest.feature_importances_
 indices = np.argsort(importances)[::-1]
 
 
-#%%
+#%% # !! Need to Scale Data
+
+
+#Drop ID before scaling
+nmerc = nmerc.drop(['ID'],axis=1)
+nmerc_scaled = preprocessing.scale(nmerc)
+
+
 #%%
 
  
